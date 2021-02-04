@@ -9,11 +9,11 @@ var app = express();
 /*
 Route                         HTTP Verb Description
 -------------------------------------------------------------------------------------------
-/iiif-manifest-storage/iiif-manifest-storage/api/manifests                GET       Get all manifests
-/iiif-manifest-storage/iiif-manifest-storage/api/manifests                POST      Create a manifest - returns manifest uri
-/iiif-manifest-storage/iiif-manifest-storage/api/manifests/:manifestId    GET       Get manifest by id
-/iiif-manifest-storage/iiif-manifest-storage/api/manifests/:manifestId    PUT       Update manifest with id
-/iiif-manifest-storage/iiif-manifest-storage/api/manifests/:manifestId    DELETE    Delete manifest with id (currently not implemented)
+/iiif-manifest-storage/api/manifests                GET       Get all manifests
+/iiif-manifest-storage/api/manifests                POST      Create a manifest - returns manifest uri
+/iiif-manifest-storage/api/manifests/:manifestId    GET       Get manifest by id
+/iiif-manifest-storage/api/manifests/:manifestId    PUT       Update manifest with id
+/iiif-manifest-storage/api/manifests/:manifestId    DELETE    Delete manifest with id (currently not implemented)
 -------------------------------------------------------------------------------------------
 */
 
@@ -40,7 +40,7 @@ app.use(allowCrossDomain);
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 app.use(bodyParser.json({ limit: '50mb' }));
 
-app.route('/iiif-manifest-storage/iiif-manifest-storage/api/manifests')
+app.route('/iiif-manifest-storage/api/manifests')
   // list all manifets
   .get(function(req, res) {
     // look up manifest list on the file system
@@ -49,7 +49,7 @@ app.route('/iiif-manifest-storage/iiif-manifest-storage/api/manifests')
     var manifestUris = [];
     manifestFiles.map((manifestFilename, index) => {
       manifestUris.push({
-        uri: req.protocol + '://' + req.headers.host + '/iiif-manifest-storage/iiif-manifest-storage/api/manifests/' + manifestFilename
+        uri: req.protocol + '://' + req.headers.host + '/iiif-manifest-storage/api/manifests/' + manifestFilename
       })
     });
 
@@ -69,10 +69,10 @@ app.route('/iiif-manifest-storage/iiif-manifest-storage/api/manifests')
     res.status(201);
 
     // return the manifest uri
-    res.json({ uri: req.protocol + '://' + req.headers.host + '/iiif-manifest-storage/iiif-manifest-storage/api/manifests/' + manifestId });
+    res.json({ uri: req.protocol + '://' + req.headers.host + '/iiif-manifest-storage/api/manifests/' + manifestId });
   });
 
-app.route('/iiif-manifest-storage/iiif-manifest-storage/api/manifests/:manifestId')
+app.route('/iiif-manifest-storage/api/manifests/:manifestId')
   // get manifest with id
   .get(function(req, res) {
     // get the manifest from the file system
