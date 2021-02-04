@@ -25,17 +25,17 @@ A simple Node application to store and retrieve IIIF manifests via REST API. It 
 
 | Route                      | HTTP Verb     | Description                                         |
 | -------------------------- | ------------- | --------------------------------------------------- |
-| /api/manifests             | GET           | Get all manifests                                   |
-| /api/manifests             | POST          | Create a manifest - returns manifest uri            |
-| /api/manifests/:manifestId | GET           | Get manifest by id                                  |
-| /api/manifests/:manifestId | PUT           | Update manifest with id                             |
-| /api/manifests/:manifestId | DELETE        | Delete manifest with id (currently not implemented) |
+| /iiif-manifest-storage/api/manifests             | GET           | Get all manifests                                   |
+| /iiif-manifest-storage/api/manifests             | POST          | Create a manifest - returns manifest uri            |
+| /iiif-manifest-storage/api/manifests/:manifestId | GET           | Get manifest by id                                  |
+| /iiif-manifest-storage/api/manifests/:manifestId | PUT           | Update manifest with id                             |
+| /iiif-manifest-storage/api/manifests/:manifestId | DELETE        | Delete manifest with id (currently not implemented) |
 
 ### Get a List of All Manifests ###
 
-**Request:** GET /api/manifests
+**Request:** GET /iiif-manifest-storage/api/manifests
 
-Example URL: http://localhost:3001/api/manifests
+Example URL: http://localhost:3001/iiif-manifest-storage/api/manifests
 
 **HTTP Status Code:** 200 OK
 
@@ -44,18 +44,18 @@ Example URL: http://localhost:3001/api/manifests
 ```javascript
 {"manifests":
   [
-    {"uri":"http://localhost:3001/api/manifests/6b3bf0a8-b8f6-452a-bcbf-f336ff335c93"},
-    {"uri":"http://localhost:3001/api/manifests/db45e27f-edbf-446b-8794-eb9070c3647e"},
-    {"uri":"http://localhost:3001/api/manifests/example-manifest"}
+    {"uri":"http://localhost:3001/iiif-manifest-storage/api/manifests/6b3bf0a8-b8f6-452a-bcbf-f336ff335c93"},
+    {"uri":"http://localhost:3001/iiif-manifest-storage/api/manifests/db45e27f-edbf-446b-8794-eb9070c3647e"},
+    {"uri":"http://localhost:3001/iiif-manifest-storage/api/manifests/example-manifest"}
   ]
 }
 ```
 
 ### Create a Manifest ###
 
-**Request:** POST /api/manifests
+**Request:** POST /iiif-manifest-storage/api/manifests
 
-Example URL: http://localhost:3001/api/manifests
+Example URL: http://localhost:3001/iiif-manifest-storage/api/manifests
 
 **HTTP Status Code:** 201 Created
 
@@ -63,15 +63,15 @@ Example URL: http://localhost:3001/api/manifests
 
 ```javascript
 {
-    "uri": "http://localhost:3001/api/manifests/f20c81a0-be0f-4cc6-bf48-891429faad11"
+    "uri": "http://localhost:3001/iiif-manifest-storage/api/manifests/f20c81a0-be0f-4cc6-bf48-891429faad11"
 }
 ```
 
 ### Update a Manifest ###
 
-**Request:** PUT /api/manifests/manifestId
+**Request:** PUT /iiif-manifest-storage/api/manifests/manifestId
 
-Example URL: http://localhost:3001/api/manifests/example-manifest
+Example URL: http://localhost:3001/iiif-manifest-storage/api/manifests/example-manifest
 
 **HTTP Status Code:** 200 OK
 
@@ -86,9 +86,9 @@ Example URL: http://localhost:3001/api/manifests/example-manifest
 
 ### Get a Single Manifest ###
 
-**Request:** GET /api/manifests/manifestId
+**Request:** GET /iiif-manifest-storage/api/manifests/manifestId
 
-Example URL: http://localhost:3001/api/manifests/example-manifest
+Example URL: http://localhost:3001/iiif-manifest-storage/api/manifests/example-manifest
 
 **HTTP Status Code:** 200 OK
 
@@ -97,7 +97,7 @@ Example URL: http://localhost:3001/api/manifests/example-manifest
 ```javascript
 {
     {
-        "@context": "http://iiif.io/api/presentation/2/context.json",
+        "@context": "http://iiif.io/iiif-manifest-storage/api/presentation/2/context.json",
         "@id": "example-manifest",
         "@type": "sc:Manifest",
         "label": "Example Manifest",
