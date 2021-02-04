@@ -49,7 +49,7 @@ app.route('/iiif-manifest-storage/api/manifests')
     var manifestUris = [];
     manifestFiles.map((manifestFilename, index) => {
       manifestUris.push({
-        uri: req.protocol + '://' + req.headers.host + '/iiif-manifest-storage/api/manifests/' + manifestFilename
+        uri: 'https://' + req.headers.host + '/iiif-manifest-storage/api/manifests/' + manifestFilename
       })
     });
 
@@ -69,7 +69,7 @@ app.route('/iiif-manifest-storage/api/manifests')
     res.status(201);
 
     // return the manifest uri
-    res.json({ uri: req.protocol + '://' + req.headers.host + '/iiif-manifest-storage/api/manifests/' + manifestId });
+    res.json({ uri: 'https://' + req.headers.host + '/iiif-manifest-storage/api/manifests/' + manifestId });
   });
 
 app.route('/iiif-manifest-storage/api/manifests/:manifestId')
