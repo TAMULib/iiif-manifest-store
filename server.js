@@ -41,8 +41,8 @@ app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 app.use(bodyParser.json({ limit: '50mb' }));
 
 // set route and data
-const  = process.env.APP_ROUTE || '/iiif-manifest-storage/api/manifests';
-const  = process.env.APP_DATA || 'data/manifests';
+const APP_ROUTE = process.env.APP_ROUTE || '/iiif-manifest-storage/api/manifests';
+const APP_DATA = process.env.APP_DATA || 'data/manifests';
 
 app.route(APP_ROUTE)
 
