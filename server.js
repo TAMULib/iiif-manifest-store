@@ -40,16 +40,21 @@ app.use(allowCrossDomain);
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 app.use(bodyParser.json({ limit: '50mb' }));
 
-app.route('/iiif-manifest-storage/api/manifests')
+// set route and data
+const  = process.env.APP_ROUTE || '/iiif-manifest-storage/api/manifests';
+const  = process.env.APP_DATA || 'data/manifests';
+
+app.route(APP_ROUTE)
+
   // list all manifets
   .get(function(req, res) {
     // look up manifest list on the file system
-    var manifestFiles = fs.readdirSync('data/manifests');
+    var manifestFiles = fs.readdirSync(APP_DATA);
 
     var manifestUris = [];
     manifestFiles.map((manifestFilename, index) => {
       manifestUris.push({
-        uri: 'https://' + req.headers.host + '/iiif-manifest-storage/api/manifests/' + manifestFilename
+        uri: 'https://' + req.headers.host + APP_ROUTE + '/' + manifestFilename
       })
     });
 
@@ -63,20 +68,20 @@ app.route('/iiif-manifest-storage/api/manifests')
     var manifestId = uuid();
 
     // store the manifest on the file system
-    fs.writeFileSync('data/manifests/' + manifestId, JSON.stringify(req.body));
+    fs.writeFileSync(APP_DATA + '/' + manifestId, JSON.stringify(req.body));
 
     // set the status code in the response
     res.status(201);
 
     // return the manifest uri
-    res.json({ uri: 'https://' + req.headers.host + '/iiif-manifest-storage/api/manifests/' + manifestId });
+    res.json({ uri: 'https://' + req.headers.host + APP_ROUTE + '/' + manifestId });
   });
 
-app.route('/iiif-manifest-storage/api/manifests/:manifestId')
+app.route(APP_ROUTE + '/:manifestId')
   // get manifest with id
   .get(function(req, res) {
     // get the manifest from the file system
-    var manifestData = fs.readFileSync('data/manifests/' + req.params.manifestId, 'utf8');
+    var manifestData = fs.readFileSync(APP_DATA + '/' + req.params.manifestId, 'utf8');
 
     // return the manifest data
     res.json(JSON.parse(manifestData));
@@ -84,7 +89,7 @@ app.route('/iiif-manifest-storage/api/manifests/:manifestId')
 
   // update an existing manifest with id
   .put(function(req, res) {
-    var manifestPath = 'data/manifests/' + req.params.manifestId;
+    var manifestPath = APP_DATA + '/' + req.params.manifestId;
     var statusCode = 200;
 
     // check the file system to determine whether the resource exists
